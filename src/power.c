@@ -2,6 +2,10 @@
 #define START_TIMER(S) struct timeval start_ ## S , end_ ## S ; gettimeofday(&start_ ## S , NULL);
 #define STOP_TIMER(S,T) gettimeofday(&end_ ## S, NULL); T->S += (double)(end_ ## S .tv_sec-start_ ## S.tv_sec)+(double)(end_ ## S .tv_usec-start_ ## S .tv_usec)/1000000;
 
+#ifndef BASE
+  #define BASE 1
+#endif
+
 #include "stdlib.h"
 #include "math.h"
 #include "sys/time.h"
@@ -48,7 +52,7 @@ int Kernel(struct dataobj *restrict u_vec, const int time_M, const int time_m, c
         #pragma omp simd aligned(u:32)
         for (int y = y_m; y <= y_M; y += 1)
         {
-          u[t1][x + 1][y + 1] = 2 * u[t0][x + 1][y + 1] + 1;
+          u[t1][x + 1][y + 1] = BASE * u[t0][x + 1][y + 1];
         }
       }
     }
