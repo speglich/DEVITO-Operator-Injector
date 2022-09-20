@@ -9,7 +9,7 @@ files = {
     'power': 'src/power.c'
     }
 
-def operatorInjector(operator, payload):
+def operatorInjector(op, payload):
 
     configuration['jit-backdoor'] = True
     configuration.add('payload', payload)
